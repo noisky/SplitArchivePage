@@ -1,18 +1,24 @@
 <?php
+if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+
 /**
- * 内容分页插件<br />
+ * 当你的文章内容很长时，可以考虑用此插件来给文章进行简单的分页，在需要分页的地方插入page（尖括号包住）即可
+ *
+ * @package SplitArchivePage
+ * @author  Noisky && gouki
+ * @version 0.1.6
+ * @link http://ffis.me
+ * @gouki http://www.neatstudio.com/
+ *
+ * 更新日志：
  * 0.1.3 修正了内容页中如果没有插入分页符内容不能显示的BUG
  * 0.1.4 修正了Rewrite规则下，还会自动加上index.php的BUG，目前在Rewrite规则下去除了index.php
  * 0.1.5 原有的程序只支持一个GET变量，现在已修正，只要是GET变量都支持
- *
- * @package SplitArchivePage
- * @author gouki
- * @version 0.1.5
- * @link http://neatstudio.com
+ * 0.1.6 修复了typecho1.1后无法识别分页标记问题 by Noisky
  */
 class SplitArchivePage_Plugin implements Typecho_Plugin_Interface
 {
-    protected static $splitWord = '###page###';
+    protected static $splitWord = '<page>';
     /**
      * 激活插件方法,如果激活失败,直接抛出异常
      *
@@ -50,11 +56,11 @@ class SplitArchivePage_Plugin implements Typecho_Plugin_Interface
      */
     public static function config(Typecho_Widget_Helper_Form $form){
         //设置分页标记
-        $name = new Typecho_Widget_Helper_Form_Element_Text('word', NULL, '###page###', _t('分页标记'));
+        $name = new Typecho_Widget_Helper_Form_Element_Text('word', NULL, '<page>', _t('分页标记'));
         $form->addInput($name);
-        $name = new Typecho_Widget_Helper_Form_Element_Text('prev', NULL, 'PREV', _t('上一页显示'));
+        $name = new Typecho_Widget_Helper_Form_Element_Text('prev', NULL, '上一页', _t('上一页显示'));
         $form->addInput($name);
-        $name = new Typecho_Widget_Helper_Form_Element_Text('next', NULL, 'NEXT', _t('下一页显示'));
+        $name = new Typecho_Widget_Helper_Form_Element_Text('next', NULL, '下一页', _t('下一页显示'));
         $form->addInput($name);
 
     }
@@ -71,11 +77,13 @@ class SplitArchivePage_Plugin implements Typecho_Plugin_Interface
     }
 
     /**
-     * 为不是richEdit用户提供插入分页符功能。
+     * 默认编辑器插入分页符功能。
      * @access public
      * @return void
      */
     public static function render(){
+		        ?><style> li#wmd-insplit-button{font-size: 20px;line-height: 20px;height: 20px;width: 20px;}</style>
+		<?php
         $splitword = Typecho_Widget::widget('Widget_Options')->plugin('SplitArchivePage')->word;
         if(!$splitword){
             $splitword = self::$splitWord;
