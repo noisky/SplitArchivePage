@@ -1,0 +1,5 @@
+.archives_page_bar{ text-align: center; padding:5px 0px;}
+.archives_page_bar A{ border:#aeaeae solid 1px; margin:0 3px; padding:0 8px; display:inline-block; line-height:20px; background:#FFF; color:#555555;}
+.archives_page_bar A:visited{color:#555555;}
+.archives_page_bar A:hover{color:#e30d00;}
+.archives_page_bar A.sel{ color:#FFF !important; background:#555555; }
