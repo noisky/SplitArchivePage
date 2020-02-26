@@ -11,10 +11,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  * @gouki http://www.neatstudio.com/
  *
  * 更新日志：
- * 0.1.3 修正了内容页中如果没有插入分页符内容不能显示的BUG
- * 0.1.4 修正了Rewrite规则下，还会自动加上index.php的BUG，目前在Rewrite规则下去除了index.php
- * 0.1.5 原有的程序只支持一个GET变量，现在已修正，只要是GET变量都支持
- * 0.1.6 修复了typecho1.1后无法识别分页标记问题 by Noisky
+ * 0.1.3 修正了内容页中如果没有插入分页符内容不能显示的 BUG
+ * 0.1.4 修正了 Rewrite 规则下，还会自动加上 index.php 的BUG，目前在 Rewrite 规则下去除了 index.php
+ * 0.1.5 原有的程序只支持一个 GET 变量，现在已修正，只要是 GET 变量都支持
+ * 0.1.6 修复了 Typecho1.1 后无法识别分页标记问题，优化了显示样式 by Noisky
  */
 class SplitArchivePage_Plugin implements Typecho_Plugin_Interface
 {
